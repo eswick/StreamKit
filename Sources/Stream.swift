@@ -21,4 +21,22 @@ public extension Stream {
     func write(uint8: UInt8) throws {
         try write([uint8])
     }
+    
+    func readString() throws -> String {
+        var str = ""
+        
+        while true {
+            let byte = try read(1)[0]
+            
+            if byte == 0x0 {
+                return str
+            } else {
+                str.appendContentsOf(String(UnicodeScalar(byte)))
+            }
+        }
+    }
+    
+    func writeString(string: String) throws {
+        try write([UInt8](string.utf8))
+    }
 }
