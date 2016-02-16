@@ -11,11 +11,11 @@ extension Stream {
     }
     
     func readInt8() throws -> Int8 {
-        return try read(1)[0]
+        return Int8(try read(1)[0])
     }
     
     func writeInt8(int8: Int8) throws {
-        try write([int8])
+        try write([UInt8(int8)])
     }
     
     func write(uint8: UInt8) throws {
