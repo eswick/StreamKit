@@ -5,7 +5,7 @@ public protocol Stream {
     func close() throws
 }
 
-extension Stream {
+public extension Stream {
     func readUInt8() throws -> UInt8 {
         return try read(1)[0]
     }
