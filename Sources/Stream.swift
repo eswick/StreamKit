@@ -22,19 +22,3 @@ public extension Stream {
         try write([uint8])
     }
 }
-
-public func >> (left: Stream, inout right: UInt8) throws {
-    right = try left.readUInt8()
-}
-
-public func >> (left: Stream, inout right: Int8) throws {
-    right = try left.readInt8()
-}
-
-public func << (left: Stream, right: UInt8) throws {
-    try left.write(right)
-}
-
-public func << (left: Stream, right: Int8) throws {
-    try left.write(right)
-}
