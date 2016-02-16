@@ -1,6 +1,13 @@
 
+public enum StreamError: ErrorType {
+    case ReadFailed(Int)
+    case WriteFailed(Int)
+    case CloseFailed(Int)
+    case Closed
+}
+
 public protocol Stream {
-    func read(maxBytes: Int) throws -> [UInt8]
+    func read(count: Int) throws -> [UInt8]
     func write(bytes: [UInt8]) throws -> Int
     func close() throws
 }
@@ -36,7 +43,7 @@ public extension Stream {
         }
     }
     
-    func writeString(string: String) throws {
+    func write(string: String) throws {
         try write([UInt8](string.utf8))
     }
 }
