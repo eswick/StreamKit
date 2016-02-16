@@ -46,4 +46,16 @@ public extension Stream {
     func write(string: String) throws {
         try write([UInt8](string.utf8))
     }
+    
+    func readUntil(byte: UInt8) throws -> [UInt8] {
+        var bytes = [UInt8]()
+        while true {
+            let byteRead = try read(1)[0]
+            if byteRead == byte {
+                return bytes
+            } else {
+                bytes.append(byteRead)
+            }
+        }
+    }
 }
