@@ -14,7 +14,7 @@ public extension Stream {
         return Int8(try read(1)[0])
     }
     
-    func writeInt8(int8: Int8) throws {
+    func write(int8: Int8) throws {
         try write([UInt8(int8)])
     }
     
