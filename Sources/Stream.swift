@@ -6,19 +6,19 @@ public protocol Stream {
 }
 
 public extension Stream {
-    public func readUInt8() throws -> UInt8 {
+    func readUInt8() throws -> UInt8 {
         return try read(1)[0]
     }
     
-    public func readInt8() throws -> Int8 {
+    func readInt8() throws -> Int8 {
         return Int8(try read(1)[0])
     }
     
-    public func writeInt8(int8: Int8) throws {
+    func writeInt8(int8: Int8) throws {
         try write([UInt8(int8)])
     }
     
-    public func write(uint8: UInt8) throws {
+    func write(uint8: UInt8) throws {
         try write([uint8])
     }
 }
