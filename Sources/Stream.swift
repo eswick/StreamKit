@@ -6,10 +6,6 @@ public protocol Stream {
 }
 
 public extension Stream {
-    func readUInt8() throws -> UInt8 {
-        return try read(1)[0]
-    }
-    
     func readInt8() throws -> Int8 {
         return Int8(try read(1)[0])
     }
@@ -18,7 +14,27 @@ public extension Stream {
         try write([UInt8(int8)])
     }
     
+    func readUInt8() throws -> UInt8 {
+        return try read(1)[0]
+    }
+    
     func write(uint8: UInt8) throws {
         try write([uint8])
     }
+}
+
+func >> (left: Stream, inout right: UInt8) throws {
+    right = try left.readUInt8()
+}
+
+func >> (left: Stream, inout right: Int8) throws {
+    right = try left.readInt8()
+}
+
+func << (left: Stream, right: UInt8) throws {
+    try left.write(right)
+}
+
+func << (left: Stream, right: Int8) throws {
+    try left.write(right)
 }
