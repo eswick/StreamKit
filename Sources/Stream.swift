@@ -4,6 +4,7 @@ public enum StreamError: ErrorType {
     case WriteFailed(Int)
     case SeekFailed(Int)
     case CloseFailed(Int)
+    case TimedOut
     case Closed
 }
 
@@ -19,6 +20,8 @@ public protocol Stream {
     var canSeek: Bool { get }
     
     var position: Int64 { get }
+    var readTimeout: UInt { get set } // milliseconds
+    var writeTimeout: UInt { get set } // milliseconds
     
     func read(count: Int64) throws -> [UInt8]
     func write(bytes: [UInt8]) throws -> Int

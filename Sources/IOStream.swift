@@ -9,7 +9,6 @@ public let stdin = IOStream(fileDescriptor: STDIN_FILENO, canWrite: false)
 public let stderr = IOStream(fileDescriptor: STDERR_FILENO, canRead: false)
 
 public class IOStream: Stream {
-    public let fileDescriptor: Int32
     public let canRead: Bool
     public let canWrite: Bool
     public let canSeek: Bool
@@ -19,6 +18,11 @@ public class IOStream: Stream {
             return Int64(lseek(fileDescriptor, 0, SEEK_CUR))
         }
     }
+    
+    public var readTimeout: UInt = 0
+    public var writeTimeout: UInt = 0
+    
+    public let fileDescriptor: Int32
     
     init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true, canSeek: Bool = true) {
         self.fileDescriptor = fileDescriptor
@@ -30,6 +34,17 @@ public class IOStream: Stream {
     public func read(count: Int64) throws -> [UInt8] {
         if !canRead {
             throw StreamError.ReadFailed(0)
+        }
+        
+        if (readTimeout != 0) {
+            var fds = [pollfd(fd: fileDescriptor, events: Int16(POLLIN), revents: 0)]
+            let pollRes = poll(&fds, 1, Int32(readTimeout))
+        
+            if pollRes == 0 {
+                throw StreamError.TimedOut
+            } else if pollRes == -1 {
+                throw StreamError.ReadFailed(Int(errno))
+            }
         }
         
         var bytes = [UInt8]()
@@ -58,6 +73,17 @@ public class IOStream: Stream {
     public func write(bytes: [UInt8]) throws -> Int {
         if !canWrite {
             throw StreamError.WriteFailed(0)
+        }
+        
+        if (writeTimeout != 0) {
+            var fds = [pollfd(fd: fileDescriptor, events: Int16(POLLOUT), revents: 0)]
+            let pollRes = poll(&fds, 1, Int32(writeTimeout))
+        
+            if pollRes == 0 {
+                throw StreamError.TimedOut
+            } else if pollRes == -1 {
+                throw StreamError.ReadFailed(Int(errno))
+            }
         }
         
         #if os(Linux)
