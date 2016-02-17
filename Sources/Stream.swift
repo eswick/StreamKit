@@ -20,7 +20,7 @@ public protocol Stream {
     
     var position: Int64 { get }
     
-    func read(count: Int) throws -> [UInt8]
+    func read(count: Int64) throws -> [UInt8]
     func write(bytes: [UInt8]) throws -> Int
     func seek(offset: Int64, origin: SeekOrigin) throws
     func close() throws

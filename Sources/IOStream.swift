@@ -16,7 +16,7 @@ public class IOStream: Stream {
     
     public var position: Int64 {
         get {
-            return lseek(fileDescriptor, 0, SEEK_CUR)
+            return Int64(lseek(fileDescriptor, 0, SEEK_CUR))
         }
     }
     
@@ -27,7 +27,7 @@ public class IOStream: Stream {
         self.canSeek = canSeek
     }
     
-    public func read(count: Int) throws -> [UInt8] {
+    public func read(count: Int64) throws -> [UInt8] {
         if !canRead {
             throw StreamError.ReadFailed(0)
         }
@@ -39,9 +39,9 @@ public class IOStream: Stream {
         }
         
         #if os(Linux)
-            let bytesRead = Glibc.read(fileDescriptor, &bytes, count)
+            let bytesRead = Glibc.read(fileDescriptor, &bytes, Int(count))
         #else
-            let bytesRead = Darwin.read(fileDescriptor, &bytes, count)
+            let bytesRead = Darwin.read(fileDescriptor, &bytes, Int(count))
         #endif
         
         if bytesRead == -1 {
@@ -89,8 +89,12 @@ public class IOStream: Stream {
             seekOrigin = SEEK_END
         }
         
-        let result = lseek(fileDescriptor, offset, seekOrigin)
-        
+        #if os(Linux)
+            let result = lseek(fileDescriptor, __off_t(offset), seekOrigin)
+        #else
+            let result = lseek(fileDescriptor, offset, seekOrigin)
+        #endif
+            
         if result == -1 {
             throw StreamError.SeekFailed(Int(errno))
         }
