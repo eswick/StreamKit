@@ -7,6 +7,9 @@ public enum StreamError: ErrorType {
 }
 
 public protocol Stream {
+    var canRead: Bool { get }
+    var canWrite: Bool { get }
+    
     func read(count: Int) throws -> [UInt8]
     func write(bytes: [UInt8]) throws -> Int
     func close() throws
