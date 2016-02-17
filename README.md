@@ -52,6 +52,19 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
   - [x] Shorthand Operators
     - [x] `<<`
     - [x] `>>`
+  - [ ] Data Type Support
+    - [x] UInt8
+    - [ ] UInt16
+    - [ ] UInt32
+    - [ ] UInt64
+    - [x] Int8
+    - [ ] Int16
+    - [ ] Int32
+    - [ ] Int64
+    - [ ] Float
+    - [ ] Double
+    - [ ] Bool
+    - [x] String
   - [x] Read
   - [x] Write
   - [x] Close
