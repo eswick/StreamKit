@@ -4,9 +4,9 @@
     import Darwin
 #endif
 
-public var stdout = IOStream(fileDescriptor: STDOUT_FILENO, canRead: false)
-public var stdin = IOStream(fileDescriptor: STDIN_FILENO, canWrite: false)
-public var stderr = IOStream(fileDescriptor: STDERR_FILENO, canRead: false)
+public let stdout = IOStream(fileDescriptor: STDOUT_FILENO, canRead: false)
+public let stdin = IOStream(fileDescriptor: STDIN_FILENO, canWrite: false)
+public let stderr = IOStream(fileDescriptor: STDERR_FILENO, canRead: false)
 
 public class IOStream: Stream {
     public let fileDescriptor: Int32
