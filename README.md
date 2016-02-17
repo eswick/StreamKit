@@ -69,3 +69,4 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
   - [x] Write
   - [x] Close
   - [ ] Seek
+  - [ ] Timeouts
