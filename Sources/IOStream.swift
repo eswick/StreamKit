@@ -12,6 +12,7 @@ public class IOStream: Stream {
     public let canRead: Bool
     public let canWrite: Bool
     public let canSeek: Bool
+    public let canTimeout: Bool
     
     public var position: Int64 {
         get {
@@ -24,10 +25,11 @@ public class IOStream: Stream {
     
     public let fileDescriptor: Int32
     
-    init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true, canSeek: Bool = true) {
+    init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true, canTimeout: Bool = true, canSeek: Bool = true) {
         self.fileDescriptor = fileDescriptor
         self.canRead = canRead
         self.canWrite = canWrite
+        self.canTimeout = canTimeout
         self.canSeek = canSeek
     }
     
@@ -36,7 +38,7 @@ public class IOStream: Stream {
             throw StreamError.ReadFailed(0)
         }
         
-        if (readTimeout != 0) {
+        if (readTimeout != 0 && canTimeout) {
             var fds = [pollfd(fd: fileDescriptor, events: Int16(POLLIN), revents: 0)]
             let pollRes = poll(&fds, 1, Int32(readTimeout))
         
@@ -75,7 +77,7 @@ public class IOStream: Stream {
             throw StreamError.WriteFailed(0)
         }
         
-        if (writeTimeout != 0) {
+        if (writeTimeout != 0 && canTimeout) {
             var fds = [pollfd(fd: fileDescriptor, events: Int16(POLLOUT), revents: 0)]
             let pollRes = poll(&fds, 1, Int32(writeTimeout))
         

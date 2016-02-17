@@ -17,6 +17,7 @@ public enum SeekOrigin {
 public protocol Stream {
     var canRead: Bool { get }
     var canWrite: Bool { get }
+    var canTimeout: Bool { get }
     var canSeek: Bool { get }
     
     var position: Int64 { get }
