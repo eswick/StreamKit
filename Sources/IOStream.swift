@@ -12,11 +12,19 @@ public class IOStream: Stream {
     public let fileDescriptor: Int32
     public let canRead: Bool
     public let canWrite: Bool
+    public let canSeek: Bool
     
-    init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true) {
+    public var position: Int64 {
+        get {
+            return lseek(fileDescriptor, 0, SEEK_CUR)
+        }
+    }
+    
+    init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true, canSeek: Bool = true) {
         self.fileDescriptor = fileDescriptor
         self.canRead = canRead
         self.canWrite = canWrite
+        self.canSeek = canSeek
     }
     
     public func read(count: Int) throws -> [UInt8] {
@@ -63,6 +71,29 @@ public class IOStream: Stream {
         }
         
         return bytesWritten
+    }
+    
+    public func seek(offset: Int64, origin: SeekOrigin) throws {
+        if !canSeek {
+            throw StreamError.SeekFailed(0)
+        }
+        
+        var seekOrigin: Int32
+        
+        switch origin {
+        case .Beginning:
+            seekOrigin = SEEK_SET
+        case .Current:
+            seekOrigin = SEEK_CUR
+        case .End:
+            seekOrigin = SEEK_END
+        }
+        
+        let result = lseek(fileDescriptor, offset, seekOrigin)
+        
+        if result == -1 {
+            throw StreamError.SeekFailed(Int(errno))
+        }
     }
     
     public func close() throws {

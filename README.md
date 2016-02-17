@@ -14,12 +14,12 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
 ## Checklist
 
 - [ ] Streams
-  - [ ] IOStream
+  - [x] IOStream
     - Read/write to UNIX file descriptors
     - [x] Read
     - [x] Write
     - [x] Close
-    - [ ] Seek
+    - [x] Seek
   - [ ] File Stream
     - Wrapper around IOStream for the filesystem
     - [ ] Read
@@ -68,5 +68,5 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
   - [x] Read
   - [x] Write
   - [x] Close
-  - [ ] Seek
+  - [x] Seek
   - [ ] Timeouts

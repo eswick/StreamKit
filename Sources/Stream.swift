@@ -2,16 +2,27 @@
 public enum StreamError: ErrorType {
     case ReadFailed(Int)
     case WriteFailed(Int)
+    case SeekFailed(Int)
     case CloseFailed(Int)
     case Closed
+}
+
+public enum SeekOrigin {
+    case Beginning
+    case Current
+    case End
 }
 
 public protocol Stream {
     var canRead: Bool { get }
     var canWrite: Bool { get }
+    var canSeek: Bool { get }
+    
+    var position: Int64 { get }
     
     func read(count: Int) throws -> [UInt8]
     func write(bytes: [UInt8]) throws -> Int
+    func seek(offset: Int64, origin: SeekOrigin) throws
     func close() throws
 }
 
