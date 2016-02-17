@@ -49,9 +49,9 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
       - [ ] Close
       - [ ] Seek
 - Base Protocol
-  - [ ] Shorthand Operators
-    - [ ] `<<`
-    - [ ] `>>`
+  - [x] Shorthand Operators
+    - [x] `<<`
+    - [x] `>>`
   - [x] Read
   - [x] Write
   - [x] Close

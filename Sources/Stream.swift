@@ -59,3 +59,27 @@ public extension Stream {
         }
     }
 }
+
+func << (left: Stream, right: Int8) throws {
+    try left.write(right)
+}
+
+func >> (left: Stream, inout right: Int8) throws {
+    right = try left.readInt8()
+}
+
+func << (left: Stream, right: UInt8) throws {
+    try left.write(right)
+}
+
+func >> (left: Stream, inout right: UInt8) throws {
+    right = try left.readUInt8()
+}
+
+func << (left: Stream, right: String) throws {
+    try left.write(right)
+}
+
+func >> (left: Stream, inout right: String) throws {
+    right = try left.readString()
+}
