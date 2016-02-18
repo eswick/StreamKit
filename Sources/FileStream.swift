@@ -79,9 +79,9 @@ public struct FileFlags {
     private(set) var sticky: Bool = false
     
     #if os(Linux)
-        typealias fileflags_t = UInt32
+        public typealias fileflags_t = UInt32
     #else
-        typealias fileflags_t = UInt16
+        public typealias fileflags_t = UInt16
     #endif
     
     private(set) var rawValue: fileflags_t {
@@ -219,7 +219,7 @@ private func fileIsWritable(path: String) -> Bool {
     #endif
 }
 
-class FileStream: IOStream {
+public class FileStream: IOStream {
     
     let path: String
     let mode: FileMode
