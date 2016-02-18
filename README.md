@@ -22,10 +22,10 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
     - [x] Seek
   - [ ] File Stream
     - Wrapper around IOStream for the filesystem
-    - [ ] Read
-    - [ ] Write
-    - [ ] Close
-    - [ ] Seek
+    - [x] Read
+    - [x] Write
+    - [x] Close
+    - [x] Seek
   - [ ] Memory Stream
     - Read/write to byte array
     - [ ] Read
