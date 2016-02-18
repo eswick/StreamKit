@@ -20,7 +20,7 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
     - [x] Write
     - [x] Close
     - [x] Seek
-  - [ ] File Stream
+  - [x] File Stream
     - Wrapper around IOStream for the filesystem
     - [x] Read
     - [x] Write
