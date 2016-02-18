@@ -144,17 +144,17 @@ public struct FileFlags {
         }
     }
     
-    var octalRepresentation: String {
+    public var octalRepresentation: String {
         get {
             return String(self.rawValue, radix: 8)
         }
     }
     
-    init(rawValue: fileflags_t) {
+    public init(rawValue: fileflags_t) {
         self.rawValue = rawValue
     }
     
-    init?(octalRepresentation rep: String) {
+    public init?(octalRepresentation rep: String) {
         if rep.characters.count == 3 {
             var str = "0"
             str.appendContentsOf(rep)
@@ -174,12 +174,12 @@ public struct FileFlags {
         }
     }
     
-    init?(octalRepresentation rep: UInt) {
+    public init?(octalRepresentation rep: UInt) {
         let strRep = String(rep)
         self.init(octalRepresentation: strRep)
     }
     
-    init() {
+    public init() {
         self.rawValue = 0
     }
 }
@@ -225,7 +225,7 @@ class FileStream: IOStream {
     let mode: FileMode
     let access: FileAccess
     
-    init(path: String, mode: FileMode = .OpenOrCreate, access: FileAccess = .ReadWrite, creationFlags: FileFlags = FileFlags(rawValue: 0o644)) throws {
+    public init(path: String, mode: FileMode = .OpenOrCreate, access: FileAccess = .ReadWrite, creationFlags: FileFlags = FileFlags(rawValue: 0o644)) throws {
         self.path = path
         self.mode = mode
         self.access = access
