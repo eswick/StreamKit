@@ -25,7 +25,7 @@ public class IOStream: Stream {
     
     public let fileDescriptor: Int32
     
-    init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true, canTimeout: Bool = true, canSeek: Bool = true) {
+    public init(fileDescriptor: Int32, canRead: Bool = true, canWrite: Bool = true, canTimeout: Bool = true, canSeek: Bool = true) {
         self.fileDescriptor = fileDescriptor
         self.canRead = canRead
         self.canWrite = canWrite
