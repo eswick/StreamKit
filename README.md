@@ -14,40 +14,13 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
 ## Checklist
 
 - [ ] Streams
-  - [x] IOStream
-    - Read/write to UNIX file descriptors
-    - [x] Read
-    - [x] Write
-    - [x] Close
-    - [x] Seek
-  - [x] File Stream
-    - Wrapper around IOStream for the filesystem
-    - [x] Read
-    - [x] Write
-    - [x] Close
-    - [x] Seek
-  - [ ] Memory Stream
-    - Read/write to byte array
-    - [ ] Read
-    - [ ] Write
-    - [ ] Close
-    - [ ] Seek
+  - [x] IOStream (read/write to UNIX file descriptors)
+  - [x] File Stream (read/write to files)
+  - [ ] Memory Stream (read/write to byte array)
   - [ ] Compression Streams
     - [ ] Deflate
-      - [ ] Read
-      - [ ] Write
-      - [ ] Close
-      - [ ] Seek
     - [ ] Gzip
-      - [ ] Read
-      - [ ] Write
-      - [ ] Close
-      - [ ] Seek
     - [ ] LZMA
-      - [ ] Read
-      - [ ] Write
-      - [ ] Close
-      - [ ] Seek
 - [ ] Base Protocol
   - [x] Shorthand Operators
     - [x] `<<`
