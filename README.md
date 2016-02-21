@@ -27,17 +27,17 @@ For usage information, check the [wiki](https://github.com/eswick/StreamKit/wiki
     - [x] `>>`
   - [ ] Data Type Support
     - [x] UInt8
-    - [ ] UInt16
-    - [ ] UInt32
-    - [ ] UInt64
+    - [x] UInt16
+    - [x] UInt32
+    - [x] UInt64
     - [x] Int8
-    - [ ] Int16
-    - [ ] Int32
-    - [ ] Int64
-    - [ ] Float
-    - [ ] Double
-    - [ ] Bool
-    - [x] String
+    - [x] Int16
+    - [x] Int32
+    - [x] Int64
+    - [x] Float
+    - [x] Double
+    - [x] Bool
+    - [ ] String
   - [x] Read
   - [x] Write
   - [x] Close
