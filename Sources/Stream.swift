@@ -32,7 +32,7 @@ public protocol Stream {
 
 public extension Stream {
     
-    func write<T>(value: T) throws {
+    public func write<T>(value: T) throws {
         var tmpValue = value
         try withUnsafePointer(&tmpValue) { pointer in
             let int8ptr = unsafeBitCast(pointer, UnsafePointer<UInt8>.self)
@@ -42,7 +42,7 @@ public extension Stream {
         }
     }
     
-    func read<T>() throws -> T {
+    public func read<T>() throws -> T {
         let byteArray = try read(Int64(sizeof(T)))
         
         return byteArray.withUnsafeBufferPointer() { pointer in
