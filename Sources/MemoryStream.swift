@@ -65,6 +65,10 @@ public class MemoryStream: Stream {
         position = refPoint + offset
     }
     
+    public init() {
+        
+    }
+    
     public func close() throws {
         
     }
