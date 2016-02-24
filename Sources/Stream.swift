@@ -53,6 +53,7 @@ public extension Stream {
     public func readAll() throws -> [UInt8] {
         try seek(0, origin: .End)
         let end = position
+        try seek(0, origin: .Beginning)
         
         return try read(end)
     }
