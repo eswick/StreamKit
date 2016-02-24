@@ -49,6 +49,13 @@ public extension Stream {
             UnsafePointer<T>(pointer.baseAddress).memory
         }
     }
+    
+    public func readAll() throws -> [UInt8] {
+        try seek(0, origin: .End)
+        let end = position
+        
+        return try read(end)
+    }
 }
 
 func << <T>(left: Stream, right: T) throws {
