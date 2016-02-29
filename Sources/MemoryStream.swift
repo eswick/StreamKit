@@ -32,12 +32,12 @@ public class MemoryStream: Stream {
     public func write(bytes: [UInt8]) throws -> Int {
         
         if Int(position + bytes.count) >= buffer.count {
-            for _ in buffer.count...(Int(position + bytes.count)) {
+            for _ in buffer.count..<(Int(position + bytes.count)) {
                 buffer.append(0)
             }
         }
         
-        buffer.replaceRange(Int(position)...(Int(position + bytes.count)), with: bytes)
+        buffer.replaceRange(Int(position)..<(Int(position + bytes.count)), with: bytes)
         
         position += bytes.count
         
